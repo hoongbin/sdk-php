@@ -1,0 +1,24 @@
+{
+    "name": "hoongbin/sdk-php",
+    "type": "library",
+    "homepage": "http://betadata.io",
+    "description": "PHP SDK for Beta Data",
+    "keywords": ["sdk", "betadata"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "hoongbin",
+            "email": "hongbin.chen@aliyun.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0"
+    },
+    "autoload": {
+        "files": ["BetaData.php"],
+        "psr-4": {
+            "hoongbin\\sdkphp\\": "src"
+        }
+    },
+    "minimum-stability": "stable"
+}
