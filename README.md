@@ -1,2 +1,0 @@
-# sdk-php
-test
