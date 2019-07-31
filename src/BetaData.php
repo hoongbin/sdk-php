@@ -7,7 +7,7 @@
  */
 
 define('BETADATE_SDK', 'php');
-define('BETADATE_SDK_VERSION', '1.10.7');
+define('BETADATE_SDK_VERSION', '0.1.0');
 
 require_once(dirname(__FILE__) . '/Base.php');
 require_once(dirname(__FILE__) . '/Exception/IllegalDataException.php');
@@ -62,14 +62,6 @@ class BetaData extends BetaData_Base
 
         // instantiate the chosen consumer
         $this->_consumer = $this->_get_consumer();
-    }
-
-    /**
-     * 私有化处理，禁止对象被克隆
-     *  
-     */
-    private function __clone() {
-
     }
 
     /**
@@ -156,7 +148,6 @@ class BetaData extends BetaData_Base
         $sdk = array(
             '_sdk' => BETADATE_SDK,
             '_sdk_version' => BETADATE_SDK_VERSION,
-            '_sdk_detail' => $this->_sdk_detail(),
         );
 
         $message['_event'] = $event_name;
@@ -165,6 +156,10 @@ class BetaData extends BetaData_Base
         $message['user_properties']  = array_merge($this->_super_properties['user_properties'], $user_properties);
         $this->_assert_properties($message['event_properties']);
         $this->_assert_properties($message['user_properties']);
+
+        if(empty($message['user_properties'])) {
+            unset($message['user_properties']);
+        }
         array_push($this->_queue, json_encode($message));
 
         if ($this->_debug()) {
@@ -177,6 +172,12 @@ class BetaData extends BetaData_Base
         }
     }
 
+    /**
+     * Determine if the Key meets the requirements
+     *
+     * @param $key
+     * @throws BetaData_Exception_IllegalDataException
+     */
     private function _assert($key)
     {
         $name_pattern = "/^((?!^^event_properties$|^user_properties$|^id$|^second_id$|^users$|^events$|^user$|^event$|^time$|^date$|^datetime$)[a-zA-Z_$][a-zA-Z\\d_$]{0,99})$/i";
@@ -185,6 +186,12 @@ class BetaData extends BetaData_Base
         }
     }
 
+    /**
+     * Determine if the properties meets the requirements
+     *
+     * @param array $properties
+     * @throws BetaData_Exception_IllegalDataException
+     */
     private function _assert_properties($properties = array())
     {
         if (!$properties) {

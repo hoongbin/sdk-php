@@ -28,7 +28,7 @@ class BetaData_Base
             'kafka'  => 'BetaData_Consumer_KafkaConsumer',
             'redis'  => 'BetaData_Consumer_RedisConsumer',
         ),
-        'url'               => 'http://backend.yiiplus.local/tracks',
+        'url'               => 'http://api.betadata.io/tracks',
         'error_callback'    => null, // callback to use on consumption failures
         'algo'              => 'sha256',
         'max_attempts'      => 10,
@@ -59,7 +59,7 @@ class BetaData_Base
         $arr = debug_backtrace();
         $class = $arr[1]['class'];
         $line = $arr[0]['line'];
-        error_log ( "[ ${class} - line ${line} ] ${msg}" );
+        error_log("[ ${class} - line ${line} ] ${msg}");
     }
 
     /**
@@ -79,41 +79,5 @@ class BetaData_Base
     {
         list($msec, $sec) = explode(' ', microtime());
         return (float)sprintf('%.0f', (floatval($msec) + floatval($sec)) * 1000);
-    }
-
-    /**
-     * Return sdk detail
-     * @return string sdk detail description
-     */
-    protected function _sdk_detail()
-    {
-        try {
-            throw new \Exception('');
-        } catch (\Exception $e) {
-            $trace = $e->getTrace();
-            if (count($trace) == 2) {
-                // 脚本内直接调用
-                $file = $trace[1]['file'];
-                $line = $trace[1]['line'];
-
-                return "in ${file} at line ${line}.";
-            } else if (count($trace) > 2) {
-                if (isset($trace[2]['class'])) {
-                    // 类成员函数内调用
-                    $class = $trace[2]['class'];
-                } else {
-                    // 全局函数内调用
-                    $class = '';
-                }
-
-                // 此处使用 [1] 非笔误，trace 信息就是如此
-                $file = $trace[1]['file'];
-                $line = $trace[1]['line'];
-                $function = $trace[2]['function'];
-                $type = $trace[2]['type'];
-
-                return "in ${file} - ${class}{$type}${function}(...) at line ${line}.";
-            }
-        }
     }
 }
