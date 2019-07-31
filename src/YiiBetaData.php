@@ -1,9 +1,9 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: yangwenhui
- * Date: 2019-07-29
- * Time: 21:03
+ * BetaData licence
+ *
+ * @copyright  Copyright 2012 BetaData, Inc.
+ * @license  http://wwww.betadata.io/ BetaData License
  */
 
 namespace hoongbin\sdkphp;
@@ -36,8 +36,7 @@ class YiiBetaData extends Component
     public $options;
 
     /**
-     * An array of properties to attach to every tracked
-     * @var array
+     * @var array 属性
      */
     public $properties = ['event_properties' => [], 'user_properties' => []];
 
@@ -50,7 +49,7 @@ class YiiBetaData extends Component
      *
      * @throws BetaData_Exception_IllegalDataException
      */
-    public function track($eventName, $eventProperties, $userProperties)
+    public function track($eventName, $eventProperties = [], $userProperties = [])
     {
         // 前置操作
         $this->trigger('beforeProperties');
@@ -60,7 +59,7 @@ class YiiBetaData extends Component
         $userProperties = array_merge($userProperties, $this->properties['user_properties']);
 
         // 实例betadata
-        $betaModel = BetaData::getInstance($this->appId, $this->token, $this->project, $this->options);
+        $betaModel = \BetaData::getInstance($this->appId, $this->token, $this->project, $this->options);
 
         // 埋点数据推送
         $betaModel->track($eventName, $eventProperties, $userProperties);
