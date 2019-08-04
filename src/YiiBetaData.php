@@ -2,7 +2,7 @@
 /**
  * BetaData licence
  *
- * @copyright  Copyright 2012 BetaData, Inc.
+ * @copyright  Copyright 2019 BetaData, Inc.
  * @license  http://wwww.betadata.io/ BetaData License
  */
 
