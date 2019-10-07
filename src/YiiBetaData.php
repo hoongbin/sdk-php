@@ -51,7 +51,6 @@ class YiiBetaData extends Component
      */
     public function track($eventName, $eventProperties = [], $userProperties = [])
     {
-        return;
         // 前置操作
         $this->trigger('beforeProperties');
 
