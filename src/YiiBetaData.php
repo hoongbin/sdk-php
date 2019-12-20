@@ -63,13 +63,17 @@ class YiiBetaData extends Component
 
         // 前置操作
         $this->trigger('beforeProperties');
+
         // 拼装用户属性
         $eventProperties = array_merge($eventProperties, $this->properties['event_properties']);
         $userProperties = array_merge($userProperties, $this->properties['user_properties']);
+
         // 后置操作
         $this->trigger('afterProperties');
+
         // 实例betadata
         $betaModel = \BetaData::getInstance($this->appId, $this->token, $this->project, $this->options);
+        
         // 埋点数据推送
         $betaModel->track($eventName, $eventProperties, $userProperties);
     }
