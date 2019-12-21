@@ -36,6 +36,11 @@ class YiiBetaData extends Component
     public $options;
 
     /**
+     * @var 开关
+     */
+    public $switch = true;
+
+    /**
      * @var array 属性
      */
     public $properties = ['event_properties' => [], 'user_properties' => []];
@@ -51,6 +56,11 @@ class YiiBetaData extends Component
      */
     public function track($eventName, $eventProperties = [], $userProperties = [])
     {
+        // 如果开关关闭不需要上传beta数据
+        if ($this->switch === false) {
+            return;
+        }
+
         // 前置操作
         $this->trigger('beforeProperties');
 
@@ -63,7 +73,7 @@ class YiiBetaData extends Component
 
         // 实例betadata
         $betaModel = \BetaData::getInstance($this->appId, $this->token, $this->project, $this->options);
-
+        
         // 埋点数据推送
         $betaModel->track($eventName, $eventProperties, $userProperties);
     }
