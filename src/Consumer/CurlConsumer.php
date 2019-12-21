@@ -71,6 +71,14 @@ class BetaData_Consumer_CurlConsumer extends BetaData_Consumer_AbstractConsumer 
                 $ch = curl_init();
                 $chs[] = $ch;
                 $body = $this->_assembling_body(array_splice($data, 0, $data_size));
+        
+                if ($this->_debug()) {
+                    // 这个参数为 false, 说明只需要校验,不需要真正写入
+                    $this->_log('cmulti dry run');
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                        'Dry-Run:true'
+                    ));
+                }
 
                 curl_setopt($ch, CURLOPT_URL, $this->_url);
                 curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -79,6 +87,14 @@ class BetaData_Consumer_CurlConsumer extends BetaData_Consumer_AbstractConsumer 
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+                curl_setopt($ch, CURLOPT_USERAGENT, 'PHP SDK');
+
+                //judge https
+                $pos = strpos($this->_url, 'https');
+                if ($pos === 0) {
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                }
+
                 curl_multi_add_handle($mh,$ch);
             }
 
