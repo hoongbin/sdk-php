@@ -38,7 +38,7 @@ class YiiBetaData extends Component
     /**
      * @var 开关
      */
-    public $switch;
+    public $switch = true;
 
     /**
      * @var array 属性
