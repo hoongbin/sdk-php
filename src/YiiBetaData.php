@@ -56,13 +56,13 @@ class YiiBetaData extends Component
      */
     public function track($eventName, $eventProperties = [], $userProperties = [])
     {
-        // 如果开关关闭不需要上传beta数据
-        if ($this->switch === false) {
-            return;
-        }
-
         // 前置操作
         $this->trigger('beforeProperties');
+
+        // 如果开关关闭不需要上传beta数据
+        if ($this->switch == false) {
+            return;
+        }
 
         // 拼装用户属性
         $eventProperties = array_merge($eventProperties, $this->properties['event_properties']);
