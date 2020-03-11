@@ -137,9 +137,9 @@ class BetaData extends BetaData_Base
      * @param string  $event_name       事件名称
      * @param array   $event_properties 事件属性
      * @param array   $user_properties  用户属性
-     * @param boolean $isBack           是否后台事件
+     * @param boolean $is_back           是否后台事件
      */
-    public function track($event_name, $event_properties = array(), $user_properties = array(), $isBack = true)
+    public function track($event_name, $event_properties = array(), $user_properties = array(), $is_back = true)
     {
         if (!is_string($event_name)) {
             throw new BetaData_Exception_IllegalDataException('event name must be a str.');
@@ -152,7 +152,7 @@ class BetaData extends BetaData_Base
         );
 
         $back = array(
-            'is_back' => $isBack
+            'is_back' => $is_back
         );
 
         $message['_event'] = $event_name;
