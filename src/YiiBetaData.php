@@ -48,13 +48,14 @@ class YiiBetaData extends Component
     /**
      * 埋点
      *
-     * @param string $eventName 事件名称
-     * @param array $eventProperties 事件属性
-     * @param array $userProperties 用户属性
+     * @param string  $eventName       事件名称
+     * @param array   $eventProperties 事件属性
+     * @param array   $userProperties  用户属性
+     * @param boolean $userProperties  是否后台事件
      *
      * @throws BetaData_Exception_IllegalDataException
      */
-    public function track($eventName, $eventProperties = [], $userProperties = [])
+    public function track($eventName, $eventProperties = [], $userProperties = [], $isBack = true)
     {
         // 前置操作
         $this->trigger('beforeProperties');
@@ -75,6 +76,6 @@ class YiiBetaData extends Component
         $betaModel = \BetaData::getInstance($this->appId, $this->token, $this->project, $this->options);
         
         // 埋点数据推送
-        $betaModel->track($eventName, $eventProperties, $userProperties);
+        $betaModel->track($eventName, $eventProperties, $userProperties, $isBack);
     }
 }
