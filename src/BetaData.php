@@ -137,9 +137,8 @@ class BetaData extends BetaData_Base
      * @param string  $event_name       事件名称
      * @param array   $event_properties 事件属性
      * @param array   $user_properties  用户属性
-     * @param boolean $backend_event    是否后台事件
      */
-    public function track($event_name, $event_properties = array(), $user_properties = array(), $backend_event = true)
+    public function track($event_name, $event_properties = array(), $user_properties = array())
     {
         if (!is_string($event_name)) {
             throw new BetaData_Exception_IllegalDataException('event name must be a str.');
@@ -151,13 +150,13 @@ class BetaData extends BetaData_Base
             '_sdk_version' => BETADATE_SDK_VERSION,
         );
 
-        $backend = array(
-            '_backend_event' => $backend_event
-        );
+        if (!isset($event_properties['_backend_event'])) {
+            $event_properties['_backend_event'] = true;
+        }
 
         $message['_event'] = $event_name;
         $message['_time']  = $this->_millisecond();
-        $message['event_properties'] = array_merge($this->_super_properties['event_properties'], $sdk, $backend, $event_properties);
+        $message['event_properties'] = array_merge($this->_super_properties['event_properties'], $sdk, $event_properties);
         $message['user_properties']  = array_merge($this->_super_properties['user_properties'], $user_properties);
         $this->_assert_properties($message['event_properties']);
         $this->_assert_properties($message['user_properties']);
