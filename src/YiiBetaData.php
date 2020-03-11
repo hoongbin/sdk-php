@@ -48,9 +48,9 @@ class YiiBetaData extends Component
     /**
      * 埋点
      *
-     * @param string $eventName 事件名称
-     * @param array $eventProperties 事件属性
-     * @param array $userProperties 用户属性
+     * @param string  $eventName       事件名称
+     * @param array   $eventProperties 事件属性
+     * @param array   $userProperties  用户属性
      *
      * @throws BetaData_Exception_IllegalDataException
      */
