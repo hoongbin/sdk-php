@@ -64,6 +64,50 @@ class YiiBetaData extends Component
             return;
         }
 
+        // 如果是后台事件(非用户自主触发)删除相关设备信息
+        if (isset($eventProperties['_backend_event']) && $eventProperties['_backend_event'] == true) {
+            // 设备号
+            if (isset($eventProperties['_device_id'])) {
+                unset($eventProperties['_device_id']);
+            }
+            // 操作系统
+            if (isset($eventProperties['_os'])) {
+                unset($eventProperties['_os']);
+            }
+            // 操作系统版本
+            if (isset($eventProperties['sv'])) {
+                unset($eventProperties['sv']);
+            }
+            // 屏幕宽度
+            if (isset($eventProperties['_screen_width'])) {
+                unset($eventProperties['_screen_width']);
+            }
+            // 屏幕高度
+            if (isset($eventProperties['_screen_height'])) {
+                unset($eventProperties['_screen_height']);
+            }
+            // 设备型号
+            if (isset($eventProperties['_model'])) {
+                unset($eventProperties['_model']);
+            }
+            // 设备制造商
+            if (isset($eventProperties['_manufacturer'])) {
+                unset($eventProperties['_manufacturer']);
+            }
+            // 网络类型
+            if (isset($eventProperties['_network_type'])) {
+                unset($eventProperties['_network_type']);
+            }
+            // 客户端IP
+            if (isset($eventProperties['_ip'])) {
+                unset($eventProperties['_ip']);
+            }
+            // 渠道
+            if (isset($eventProperties['_channel'])) {
+                unset($eventProperties['_channel']);
+            }
+        }
+
         // 拼装用户属性
         $eventProperties = array_merge($eventProperties, $this->properties['event_properties']);
         $userProperties = array_merge($userProperties, $this->properties['user_properties']);
