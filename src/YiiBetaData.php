@@ -65,46 +65,46 @@ class YiiBetaData extends Component
         }
 
         // 如果是后台事件(非用户自主触发)删除相关设备信息
-        if (isset($eventProperties['_backend_event']) && $eventProperties['_backend_event'] == true) {
+        if (isset($this->properties['event_properties']['_backend_event']) && $this->properties['event_properties']['_backend_event'] == true) {
             // 设备号
-            if (isset($eventProperties['_device_id'])) {
-                unset($eventProperties['_device_id']);
+            if (isset($this->properties['event_properties']['_device_id'])) {
+                unset($this->properties['event_properties']['_device_id']);
             }
             // 操作系统
-            if (isset($eventProperties['_os'])) {
-                unset($eventProperties['_os']);
+            if (isset($this->properties['event_properties']['_os'])) {
+                unset($this->properties['event_properties']['_os']);
             }
             // 操作系统版本
-            if (isset($eventProperties['sv'])) {
-                unset($eventProperties['sv']);
+            if (isset($this->properties['event_properties']['sv'])) {
+                unset($this->properties['event_properties']['sv']);
             }
             // 屏幕宽度
-            if (isset($eventProperties['_screen_width'])) {
-                unset($eventProperties['_screen_width']);
+            if (isset($this->properties['event_properties']['_screen_width'])) {
+                unset($this->properties['event_properties']['_screen_width']);
             }
             // 屏幕高度
-            if (isset($eventProperties['_screen_height'])) {
-                unset($eventProperties['_screen_height']);
+            if (isset($this->properties['event_properties']['_screen_height'])) {
+                unset($this->properties['event_properties']['_screen_height']);
             }
             // 设备型号
-            if (isset($eventProperties['_model'])) {
-                unset($eventProperties['_model']);
+            if (isset($this->properties['event_properties']['_model'])) {
+                unset($this->properties['event_properties']['_model']);
             }
             // 设备制造商
-            if (isset($eventProperties['_manufacturer'])) {
-                unset($eventProperties['_manufacturer']);
+            if (isset($this->properties['event_properties']['_manufacturer'])) {
+                unset($this->properties['event_properties']['_manufacturer']);
             }
             // 网络类型
-            if (isset($eventProperties['_network_type'])) {
-                unset($eventProperties['_network_type']);
+            if (isset($this->properties['event_properties']['_network_type'])) {
+                unset($this->properties['event_properties']['_network_type']);
             }
             // 客户端IP
-            if (isset($eventProperties['_ip'])) {
-                unset($eventProperties['_ip']);
+            if (isset($this->properties['event_properties']['_ip'])) {
+                unset($this->properties['event_properties']['_ip']);
             }
             // 渠道
-            if (isset($eventProperties['_channel'])) {
-                unset($eventProperties['_channel']);
+            if (isset($this->properties['event_properties']['_channel'])) {
+                unset($this->properties['event_properties']['_channel']);
             }
         }
 
