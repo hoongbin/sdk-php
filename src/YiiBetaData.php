@@ -67,6 +67,7 @@ class YiiBetaData extends Component
         // 拼装用户属性
         $eventProperties = array_merge($eventProperties, $this->properties['event_properties']);
         $userProperties = array_merge($userProperties, $this->properties['user_properties']);
+        
         // 后置操作
         $this->trigger('afterProperties');
 
