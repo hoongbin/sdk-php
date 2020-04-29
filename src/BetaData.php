@@ -154,6 +154,50 @@ class BetaData extends BetaData_Base
             $event_properties['_backend_event'] = true;
         }
 
+        // 如果是后台事件(非用户自主触发)删除相关设备信息
+        if (isset($event_properties['_backend_event']) && $event_properties['_backend_event'] == true) {
+            // 设备号
+            if (isset($event_properties['_device_id'])) {
+                unset($event_properties['_device_id']);
+            }
+            // 操作系统
+            if (isset($event_properties['_os'])) {
+                unset($event_properties['_os']);
+            }
+            // 操作系统版本
+            if (isset($event_properties['sv'])) {
+                unset($event_properties['sv']);
+            }
+            // 屏幕宽度
+            if (isset($event_properties['_screen_width'])) {
+                unset($event_properties['_screen_width']);
+            }
+            // 屏幕高度
+            if (isset($event_properties['_screen_height'])) {
+                unset($event_properties['_screen_height']);
+            }
+            // 设备型号
+            if (isset($event_properties['_model'])) {
+                unset($event_properties['_model']);
+            }
+            // 设备制造商
+            if (isset($event_properties['_manufacturer'])) {
+                unset($event_properties['_manufacturer']);
+            }
+            // 网络类型
+            if (isset($event_properties['_network_type'])) {
+                unset($event_properties['_network_type']);
+            }
+            // 客户端IP
+            if (isset($event_properties['_ip'])) {
+                unset($event_properties['_ip']);
+            }
+            // 渠道
+            if (isset($event_properties['_channel'])) {
+                unset($event_properties['_channel']);
+            }
+        }
+        
         $message['_event'] = $event_name;
         $message['_time']  = $this->_millisecond();
         $message['event_properties'] = array_merge($this->_super_properties['event_properties'], $sdk, $event_properties);
