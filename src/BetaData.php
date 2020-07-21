@@ -149,11 +149,7 @@ class BetaData extends BetaData_Base
             '_sdk' => BETADATE_SDK,
             '_sdk_version' => BETADATE_SDK_VERSION,
         );
-
-        if (!isset($event_properties['_backend_event'])) {
-            $event_properties['_backend_event'] = true;
-        }
-
+        
         $message['_event'] = $event_name;
         $message['_time']  = $this->_millisecond();
         $message['event_properties'] = array_merge($this->_super_properties['event_properties'], $sdk, $event_properties);
