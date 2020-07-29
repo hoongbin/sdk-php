@@ -51,7 +51,7 @@ class YiiBetaData extends Component
      * @param string  $eventName       事件名称
      * @param array   $eventProperties 事件属性
      * @param array   $userProperties  用户属性
-     * @param bool   $isTrigger  是否触发事件
+     * @param bool   $isTrigger  是否触发绑定事件
      *
      * @throws BetaData_Exception_IllegalDataException
      */
@@ -59,14 +59,13 @@ class YiiBetaData extends Component
     {
         // 前置操作
         if($isTrigger === true) {
+            // 前置操作
             $this->trigger('beforeProperties');
             // 拼装事件和用户属性
             $eventProperties = array_merge($eventProperties, $this->properties['event_properties']);
             $userProperties = array_merge($userProperties, $this->properties['user_properties']);
-        }
 
-        // 后置操作
-        if($isTrigger === true) {
+            // 后置操作
             $this->trigger('afterProperties');
         }
 
