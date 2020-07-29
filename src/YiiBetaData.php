@@ -36,11 +36,6 @@ class YiiBetaData extends Component
     public $options;
 
     /**
-     * @var 开关
-     */
-    public $switch = true;
-
-    /**
      * @var array 属性
      */
     public $properties = ['event_properties' => [], 'user_properties' => []];
