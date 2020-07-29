@@ -36,11 +36,6 @@ class YiiBetaData extends Component
     public $options;
 
     /**
-     * @var 开关
-     */
-    public $switch = true;
-
-    /**
      * @var array 属性
      */
     public $properties = ['event_properties' => [], 'user_properties' => []];
@@ -51,29 +46,29 @@ class YiiBetaData extends Component
      * @param string  $eventName       事件名称
      * @param array   $eventProperties 事件属性
      * @param array   $userProperties  用户属性
+     * @param bool   $isTrigger  是否触发绑定事件
      *
      * @throws BetaData_Exception_IllegalDataException
      */
-    public function track($eventName, $eventProperties = [], $userProperties = [])
+    public function track($eventName, $eventProperties = [], $userProperties = [], $isTrigger = true)
     {
         // 前置操作
-        $this->trigger('beforeProperties');
-
-        // 如果开关关闭不需要上传beta数据
-        if ($this->switch == false) {
-            return;
+        if($isTrigger === true) {
+            $this->trigger('beforeProperties');
         }
 
-        // 拼装用户属性
+        // 拼装事件和用户属性
         $eventProperties = array_merge($eventProperties, $this->properties['event_properties']);
         $userProperties = array_merge($userProperties, $this->properties['user_properties']);
-        
+
         // 后置操作
-        $this->trigger('afterProperties');
+        if($isTrigger === true) {
+            $this->trigger('afterProperties');
+        }
 
         // 实例betadata
         $betaModel = \BetaData::getInstance($this->appId, $this->token, $this->project, $this->options);
-        
+
         // 埋点数据推送
         $betaModel->track($eventName, $eventProperties, $userProperties);
     }
