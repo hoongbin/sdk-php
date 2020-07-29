@@ -59,13 +59,15 @@ class YiiBetaData extends Component
     {
         // 前置操作
         if($isTrigger === true) {
-            // 前置操作
             $this->trigger('beforeProperties');
-            // 拼装事件和用户属性
-            $eventProperties = array_merge($eventProperties, $this->properties['event_properties']);
-            $userProperties = array_merge($userProperties, $this->properties['user_properties']);
+        }
 
-            // 后置操作
+        // 拼装事件和用户属性
+        $eventProperties = array_merge($eventProperties, $this->properties['event_properties']);
+        $userProperties = array_merge($userProperties, $this->properties['user_properties']);
+
+        // 后置操作
+        if($isTrigger === true) {
             $this->trigger('afterProperties');
         }
 
